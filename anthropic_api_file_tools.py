@@ -2,6 +2,8 @@ import subprocess
 import anthropic
 import mimetypes
 import os
+import pandas as pd
+from tabulate import tabulate
 
 # Test the API
 def test_api(client, file_id=None):
@@ -90,8 +92,29 @@ def list_files_in_workspace(client):
     try:
         page = client.beta.files.list()
         print("Files currently uploaded to the Anthropic API Workspace:")
+        
+        files_dict = {}
         for file in page:
-            print(file)
+            created_at = file.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            files_dict[file.id] = {
+                "created_at": created_at,
+                "filename": file.filename,
+                "mime_type": file.mime_type,
+                "size_bytes": file.size_bytes,
+                "type": file.type,
+                "downloadable": file.downloadable
+            }      
+        df = pd.DataFrame.from_dict(files_dict, orient='index')
+        df = df.rename(columns={
+            "created_at": "Created",
+            "filename": "File Name",
+            "mime_type": "MIME Type",
+            "size_bytes": "Size (bytes)",
+            "type": "Type",
+            "downloadable": "Downloadable"
+        })
+        df = df.reset_index().rename(columns={"index": "File ID"})
+        print(df.to_markdown(tablefmt="grid"))
     except Exception as e:
         print(f"Failed to list files: {e}")
 
@@ -102,3 +125,13 @@ def delete_file_from_workspace(client, file_id):
         print(f"File with ID {file_id} deleted successfully.")
     except Exception as e:
         print(f"Failed to delete file: {e}")
+
+# Delete all files from the Anthropic API Workspace
+def delete_all_files_from_workspace(client):
+    try:
+        page = client.beta.files.list()
+        for file in page:
+            client.beta.files.delete(file_id=file.id)
+            print(f"Deleted file with ID {file.id}")
+    except Exception as e:
+        print(f"Failed to delete files: {e}")
