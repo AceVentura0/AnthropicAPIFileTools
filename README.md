@@ -1,6 +1,6 @@
 # AnthropicAPIFileTools
 
-A simple Python helper package for working with the Anthropic Claude API's file upload features. The Anthropic files API is still new and in beta, so these basic wrapper functions are for convenience when uploading, listing, and deleting files in your Anthropic workspace.
+A simple Python helper package for working with the Anthropic API's file upload features. The Anthropic files API is still new and in beta, so these basic wrapper functions are for convenience when uploading, listing, and deleting files in your Anthropic workspace.
 
 ## Why?
 The Anthropic files API is still evolving and not yet widely documented. These wrappers make it easier to:
