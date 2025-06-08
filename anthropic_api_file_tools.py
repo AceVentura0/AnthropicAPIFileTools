@@ -1,3 +1,8 @@
+# MIT License
+# Copyright (c) 2025 Tobias Radke
+# This file is part of AnthropicAPIFileTools and is licensed under the MIT License.
+# See the LICENSE file in the project root for full license text.
+
 import subprocess
 import anthropic
 import mimetypes

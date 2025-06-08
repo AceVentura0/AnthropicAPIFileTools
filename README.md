@@ -13,6 +13,9 @@ The Anthropic files API is still evolving and not yet widely documented. These w
 - [Anthropic API documentation](https://docs.anthropic.com/en/api/overview)
 - [Anthropic API Files documentation](https://docs.anthropic.com/en/docs/build-with-claude/files)
 
+## Third-Party Dependencies and Legal Notice
+This package uses the [Anthropic Python SDK](https://github.com/anthropics/anthropic-sdk-python) to interact with the Claude API. Use of the Anthropic API is subject to [Anthropic's Terms of Service](https://www.anthropic.com/legal/terms-of-service) and [API documentation](https://docs.anthropic.com/en/api/overview). You must have your own valid API key and comply with all applicable terms. This package does not include or redistribute any Anthropic proprietary code.
+
 ## Installation
 Clone this repository and install the package in editable mode:
 
